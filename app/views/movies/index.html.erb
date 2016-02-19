@@ -1,0 +1,16 @@
+<h1>My Movies</h1>
+
+<div class="row">
+	<% @movies.each do |movie| %>
+		<div class="col-md-3">
+			<%= link_to image_tag(movie.image_url, size:"280x320", class: "thumbnail"), movie_path(movie) %>
+			<div class="col-md-12 action-button">
+				<p><%= movie.title %></p>
+				<% if current_user.id == movie.user_id %>
+					<%= link_to "Edit", edit_movie_path(movie), class: "btn btn-primary col-md-6" %>
+					<%= link_to "Delete", movie_path(movie), method: "delete", data: { confirm: "sure?"}, class: "btn btn-danger col-md-6" %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+</div>

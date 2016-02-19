@@ -1,0 +1,8 @@
+development:
+  cloud_name: 'hp8lylna0'
+  api_key: '857254212911177'
+  api_secret: 't_W4U0PCDeFfmYI8EA1_gKaIFM8'
+production:
+  cloud_name: 'hp8lylna0'
+  api_key: '857254212911177'
+  api_secret: 't_W4U0PCDeFfmYI8EA1_gKaIFM8'

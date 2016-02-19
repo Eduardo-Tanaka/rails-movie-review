@@ -1,0 +1,79 @@
+<div class="row">
+	<div class="col-md-5">
+		<div>
+			<h1><%= @movie.title %></h1>
+			<%= image_tag(@movie.image_url, size:"280x320", class: "thumbnail") %>
+		</div>
+
+		<div class="movie-info col-md-12">
+			<div id="star-movie"></div>
+			<div>
+				<%= simple_format(@movie.description) %>
+			</div>
+			<div>
+				<p><span class="info">Director:</span> <%= @movie.director %></p>
+				<p><span class="info">Movie Length:</span> <%= @movie.movie_length %></p>
+				<p><span class="info">Rating:</span> <%= @movie.rating %></p>
+			</div>
+			<% if user_signed_in? %>
+				<a data-toggle="modal" href="#myModal">review this movie</a>
+			<% else %>
+				<%= link_to "login to post a review", new_user_session_path %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<h3>User Reviews</h3>
+		<% if @movie.reviews.count != 0 %>
+			<% @movie.reviews.each do |review| %>
+				<p>Posted by <%= review.user.email %> | <%= time_ago_in_words(review.created_at) %></p>
+				<p class="<%=review.id%>"></p>
+				<script>
+					$('.<%=review.id%>').raty({
+						readOnly : true,
+						score    : <%= review.rating %>,
+						number	 : 10
+					});	
+				</script>
+				<p><%= simple_format(review.comment) %></p>
+			<% end %>
+		<% else %>
+			<p>No one posted a review yet.</p>
+		<% end %>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_for([@movie, @movie.reviews.build], validate: true) do |f| %>
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"><%= @movie.title %>  <span id="star"></span></h4>
+	      </div>
+	      
+	      <div class="modal-body">
+	      	<%= f.text_area(:comment, class: "form-control", placeholder: "Write a review", rows: 5) %>	
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary">Save</button>
+	      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+	$('#star').raty({
+	    scoreName : 'review[rating]',
+	    score     : 1,
+		number    : 10
+	});
+	$('#star-movie').raty({
+		readOnly : true,
+		score    : <%= @rate %>,
+	    number   : 10
+	});
+</script>
