@@ -1,28 +1,22 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple movie reviewer site
 
-Things you may want to cover:
+User stories
 
-* Ruby version
+1- User can register using email and password
+2- User can login(Use this user if you dont want to register -> email: teste@gmail.com; password: 12341234)
+3- User can change his password
+4- User can create a movie with a title, description, director, movie length, rating and a poster
+5- User can write a review and rate the movie
+6- User can see a list of his movies
+7- User can edit and delete his movie
+8- User can logout
 
-* System dependencies
+TodoList
+- create movie categories
+- pagination
+- list of reviews
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+framework: ruby on rails
+db: postgre
